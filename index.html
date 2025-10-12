@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gas Station Revenue Optimization Report</title>
+    <title>Gas Station Pricing Strategy Analysis</title>
     <style>
         * {
             margin: 0;
@@ -20,22 +20,23 @@
         }
 
         .header {
-            background: #000000;
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
             color: #ffffff;
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             text-align: center;
             border-bottom: 4px solid #000000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .header h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 0.5rem;
         }
 
         .header p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #cccccc;
             letter-spacing: 0.05em;
             text-transform: uppercase;
@@ -48,27 +49,44 @@
         }
 
         .config-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .config-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             letter-spacing: 0.05em;
             text-transform: uppercase;
+            color: #1a1a1a;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .input-group {
-            margin-bottom: 1.5rem;
+            background: white;
+            padding: 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .input-group:hover {
+            border-color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .input-group label {
             display: block;
             font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
             color: #333333;
             letter-spacing: 0.05em;
             text-transform: uppercase;
@@ -76,18 +94,19 @@
 
         .input-group input {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.875rem;
             border: 2px solid #d0d0d0;
             border-radius: 4px;
             font-size: 0.9rem;
             font-family: monospace;
-            background: #ffffff;
-            transition: border-color 0.2s;
+            background: #fafafa;
+            transition: all 0.2s;
         }
 
         .input-group input:focus {
             outline: none;
             border-color: #000000;
+            background: #ffffff;
         }
 
         .input-group small {
@@ -101,24 +120,29 @@
         .btn {
             background: #000000;
             color: #ffffff;
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
 
         .btn:hover {
             background: #333333;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transform: translateY(-1px);
         }
 
         .btn:disabled {
             background: #cccccc;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .tabs {
@@ -130,12 +154,12 @@
         }
 
         .tab {
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             cursor: pointer;
             border: none;
             background: transparent;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.95rem;
+            font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
             color: #666666;
@@ -155,7 +179,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -176,42 +200,60 @@
 
         .section {
             margin-bottom: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .section-header {
-            border-bottom: 2px solid #000000;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #000000;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
         }
 
         .section-header h2 {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
+        }
+
+        .section-header p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
         .stat-card {
             background: #fafafa;
-            border: 1px solid #e0e0e0;
+            border: 2px solid #e0e0e0;
             padding: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .stat-card:hover {
+            border-color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .stat-card.highlight {
-            background: #fff7ed;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
             border-left: 4px solid #d97706;
+            border-color: #f59e0b;
         }
 
         .stat-label {
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: #666666;
@@ -293,9 +335,9 @@
 
         .loading-spinner {
             display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f0f0f0;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f0f0f0;
             border-top-color: #000000;
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -311,26 +353,64 @@
             border: 2px solid #fcc;
             padding: 1.5rem;
             margin: 2rem 0;
-            border-radius: 4px;
+            border-radius: 8px;
             color: #c00;
         }
 
         .meta-info {
             background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            padding: 1.25rem;
             margin: 2rem 0;
             font-size: 0.85rem;
             color: #666666;
+            border-radius: 8px;
         }
 
-        .equation {
-            font-family: 'Courier New', monospace;
-            background: #f5f5f5;
-            padding: 0.5rem 1rem;
-            margin: 0.5rem 0;
-            border-left: 3px solid #000000;
-            font-size: 0.9rem;
+        .competitor-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .competitor-btn {
+            padding: 0.625rem 1.25rem;
+            border: 2px solid #d0d0d0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            color: #666;
+        }
+
+        .competitor-btn:hover {
+            border-color: #666;
+            color: #000;
+        }
+
+        .competitor-btn.active {
+            background: #000;
+            color: white;
+            border-color: #000;
+        }
+
+        .subsection {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #fafafa;
+            border-radius: 6px;
+            border-left: 4px solid #666;
+        }
+
+        .subsection h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 700;
+            letter-spacing: 0.03em;
         }
 
         @media print {
@@ -350,6 +430,10 @@
                 grid-template-columns: 1fr;
             }
             
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+            
             table {
                 font-size: 0.75rem;
             }
@@ -362,56 +446,72 @@
 </head>
 <body>
     <div class="header">
-        <h1>Gas Station Revenue Optimization Report</h1>
-        <p>Statistical Analysis & Pricing Strategy</p>
+        <h1>⛽ Gas Station Pricing Strategy Analysis</h1>
+        <p>Competitor-Specific Correlation & Optimization</p>
     </div>
 
     <div class="config-section">
         <div class="config-container">
             <div class="config-title">📊 Data Source Configuration</div>
             
-            <div class="input-group">
-                <label>휘발유 데이터 CSV URL</label>
-                <input type="text" id="gasUrl" placeholder="Google Sheets 게시된 CSV URL을 입력하세요">
-                <small>
-                    📝 Google Sheets → 파일 → 공유 → 웹에 게시 → "revenue_gas" 시트 → CSV 형식 선택 → URL 복사
-                </small>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>🟡 휘발유 가격 데이터 (Gasoline Sheet)</label>
+                    <input type="text" id="gasolinePriceUrl" placeholder="Gasoline 시트 CSV URL">
+                    <small>Date, SLPE, 풍산주유소, 중부주유소, 구산주유소, 만남주유소, 베스트원주유소, 약수터주유소, 유니드주유소, 백제주유소</small>
+                </div>
+
+                <div class="input-group">
+                    <label>🟢 경유 가격 데이터 (Diesel Sheet)</label>
+                    <input type="text" id="dieselPriceUrl" placeholder="Diesel 시트 CSV URL">
+                    <small>Date, SLPE, 풍산주유소, 중부주유소, 구산주유소, 만남주유소, 베스트원주유소, 약수터주유소, 유니드주유소, 백제주유소</small>
+                </div>
+
+                <div class="input-group">
+                    <label>📈 판매량 데이터 (PM copy Sheet)</label>
+                    <input type="text" id="salesUrl" placeholder="PM copy 시트 CSV URL">
+                    <small>Date, 휘발유 총판매수량, 휘발유 총건수, 경유 총판매수량, 경유 총건수</small>
+                </div>
             </div>
 
-            <div class="input-group">
-                <label>경유 데이터 CSV URL</label>
-                <input type="text" id="dieselUrl" placeholder="Google Sheets 게시된 CSV URL을 입력하세요">
-                <small>
-                    📝 Google Sheets → 파일 → 공유 → 웹에 게시 → "revenue_diesel" 시트 → CSV 형식 선택 → URL 복사
-                </small>
-            </div>
-
-            <button class="btn" id="loadDataBtn" onclick="loadAllData()">Load Data</button>
+            <button class="btn" id="loadDataBtn" onclick="loadAllData()">🚀 Load & Analyze Data</button>
         </div>
     </div>
 
     <div class="tabs">
-        <button class="tab active" onclick="switchTab('gas')">휘발유</button>
-        <button class="tab" onclick="switchTab('diesel')">경유</button>
+        <button class="tab active" onclick="switchTab('gasoline')">🟡 휘발유 분석</button>
+        <button class="tab" onclick="switchTab('diesel')">🟢 경유 분석</button>
     </div>
 
     <div class="container">
-        <div id="gasReport" class="report active">
+        <div id="gasolineReport" class="report active">
             <div class="loading">
                 <div class="loading-spinner"></div>
-                <p>Loading data...</p>
+                <p>데이터를 로드하고 분석 중입니다...</p>
             </div>
         </div>
 
         <div id="dieselReport" class="report">
             <div class="loading">
                 <div class="loading-spinner"></div>
-                <p>Loading data...</p>
+                <p>데이터를 로드하고 분석 중입니다...</p>
             </div>
         </div>
     </div>
 
     <script>
+        // 경쟁사 목록
+        const COMPETITORS = [
+            '풍산주유소',
+            '중부주유소',
+            '구산주유소',
+            '만남주유소',
+            '베스트원주유소',
+            '약수터주유소',
+            '유니드주유소',
+            '백제주유소'
+        ];
+
         function switchTab(type) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.report').forEach(r => r.classList.remove('active'));
@@ -440,69 +540,81 @@
             return data;
         }
 
-        function analyzeData(data, fuelType) {
-            console.log(`Analyzing ${fuelType} data:`, data.length, 'rows');
+        function mergeData(priceData, salesData, fuelType) {
+            console.log(`Merging ${fuelType} data...`);
             
-            // 만남의 광장 필터링 및 분석
-            const mannamData = [];
-            const competitorData = {};
-            
-            data.forEach(row => {
-                const competitor = row['경쟁사'];
-                const priceDiff = parseFloat(row['가격 차이']);
-                const revenue = parseFloat(row['매출']);
-                
-                if (isNaN(priceDiff) || isNaN(revenue)) return;
-                
-                if (competitor === '만남의 광장') {
-                    // 만남: -15 ~ +10 범위
-                    if (priceDiff >= -15 && priceDiff <= 10) {
-                        mannamData.push({priceDiff, revenue});
-                    }
+            const salesMap = {};
+            salesData.forEach(row => {
+                const date = row['Date'];
+                if (fuelType === 'gasoline') {
+                    salesMap[date] = {
+                        volume: parseFloat(row['휘발유 총판매수량'] || row['휘발유총판매수량'] || 0),
+                        count: parseFloat(row['휘발유 총건수'] || row['휘발유총건수'] || 0)
+                    };
                 } else {
-                    if (!competitorData[competitor]) {
-                        competitorData[competitor] = [];
-                    }
-                    competitorData[competitor].push({priceDiff, revenue});
+                    salesMap[date] = {
+                        volume: parseFloat(row['경유 총판매수량'] || row['경유총판매수량'] || 0),
+                        count: parseFloat(row['경유 총건수'] || row['경유총건수'] || 0)
+                    };
                 }
             });
             
-            // 각 경쟁사별 IQR outlier 제거
-            const processedData = [...mannamData];
-            let outlierCount = 0;
-            
-            Object.keys(competitorData).forEach(competitor => {
-                const compData = competitorData[competitor];
-                const revenues = compData.map(d => d.revenue).sort((a, b) => a - b);
+            const mergedData = [];
+            priceData.forEach(row => {
+                const date = row['Date'];
+                const ourPrice = parseFloat(row['SLPE']);
+                const salesInfo = salesMap[date];
                 
-                const q1 = revenues[Math.floor(revenues.length * 0.25)];
-                const q3 = revenues[Math.floor(revenues.length * 0.75)];
-                const iqr = q3 - q1;
-                const lowerBound = q1 - 1.5 * iqr;
-                const upperBound = q3 + 1.5 * iqr;
+                if (!salesInfo || isNaN(ourPrice)) return;
                 
-                compData.forEach(d => {
-                    if (d.revenue >= lowerBound && d.revenue <= upperBound) {
-                        processedData.push(d);
-                    } else {
-                        outlierCount++;
-                    }
+                COMPETITORS.forEach(competitor => {
+                    const compPrice = parseFloat(row[competitor]);
+                    if (isNaN(compPrice)) return;
+                    
+                    const priceDiff = ourPrice - compPrice;
+                    
+                    mergedData.push({
+                        date,
+                        competitor,
+                        ourPrice,
+                        compPrice,
+                        priceDiff,
+                        volume: salesInfo.volume,
+                        count: salesInfo.count
+                    });
                 });
             });
             
-            console.log(`Processed data: ${processedData.length} points (${outlierCount} outliers removed)`);
+            console.log(`Merged data points: ${mergedData.length}`);
+            return mergedData;
+        }
+
+        function analyzeByCompetitor(data, competitor) {
+            const competitorData = data.filter(d => d.competitor === competitor);
             
-            // 회귀 분석
-            const n = processedData.length;
-            const x = processedData.map(d => d.priceDiff);
-            const y = processedData.map(d => d.revenue);
+            if (competitorData.length < 10) {
+                return null;
+            }
             
+            const x = competitorData.map(d => d.priceDiff);
+            const y = competitorData.map(d => d.volume);
+            
+            return performRegression(x, y, competitorData.length, competitor);
+        }
+
+        function analyzeAll(data) {
+            const x = data.map(d => d.priceDiff);
+            const y = data.map(d => d.volume);
+            
+            return performRegression(x, y, data.length, '전체 통합');
+        }
+
+        function performRegression(x, y, n, label) {
             // Linear regression
             const sumX = x.reduce((a, b) => a + b, 0);
             const sumY = y.reduce((a, b) => a + b, 0);
             const sumXY = x.reduce((sum, xi, i) => sum + xi * y[i], 0);
             const sumX2 = x.reduce((sum, xi) => sum + xi * xi, 0);
-            const sumY2 = y.reduce((sum, yi) => sum + yi * yi, 0);
             
             const meanX = sumX / n;
             const meanY = sumY / n;
@@ -520,7 +632,6 @@
             const adjR2 = 1 - ((1 - r2) * (n - 1) / (n - 2));
             
             // Standard error
-            const residuals = y.map((yi, i) => yi - predictions[i]);
             const rmse = Math.sqrt(ssRes / n);
             const stdError = Math.sqrt(ssRes / (n - 2));
             
@@ -532,68 +643,51 @@
             const msRes = ssRes / (n - 2);
             const fStat = msReg / msRes;
             
-            // p-value (approximate)
+            // t-statistic
             const tStat = slope / (stdError / Math.sqrt(sumX2 - sumX * sumX / n));
             
-            // Polynomial degree 2
-            const poly2 = fitPolynomial(x, y, 2);
+            // Optimal price (where derivative = 0)
+            const optimalPrice = -intercept / slope;
+            const maxVolume = slope * optimalPrice + intercept;
             
-            // Polynomial degree 3
+            // Polynomial regressions
+            const poly2 = fitPolynomial(x, y, 2);
             const poly3 = fitPolynomial(x, y, 3);
             
-            // 최적 가격 찾기 (linear 기준)
-            const optimalPrice = -intercept / slope;
-            const maxRevenue = slope * optimalPrice + intercept;
+            // Find optimal from polynomial
+            let optimalPrice2 = optimalPrice;
+            let maxVolume2 = maxVolume;
             
-            // 신뢰구간 (95%)
-            const ciMargin = 1.96 * stdError;
-            const ciLower = maxRevenue - ciMargin;
-            const ciUpper = maxRevenue + ciMargin;
-            
-            // 잔차 분석
-            const residualMean = residuals.reduce((a, b) => a + b, 0) / n;
-            const residualStd = Math.sqrt(residuals.reduce((sum, r) => sum + Math.pow(r - residualMean, 2), 0) / n);
-            const skewness = calculateSkewness(residuals);
-            const kurtosis = calculateKurtosis(residuals);
-            
-            // Durbin-Watson
-            const dw = calculateDurbinWatson(residuals);
-            
-            // Elasticity
-            const elasticity = slope * (meanX / meanY);
+            if (poly2.coeffs[2] < 0) { // Concave down
+                optimalPrice2 = -poly2.coeffs[1] / (2 * poly2.coeffs[2]);
+                maxVolume2 = poly2.coeffs[0] + poly2.coeffs[1] * optimalPrice2 + poly2.coeffs[2] * optimalPrice2 * optimalPrice2;
+            }
             
             return {
+                label,
                 n,
-                outlierCount,
-                optimalPrice,
-                maxRevenue,
                 slope,
                 intercept,
                 r2,
                 adjR2,
                 rmse,
-                stdError,
                 correlation,
                 fStat,
                 tStat,
-                ciLower,
-                ciUpper,
-                ciMargin,
-                residualMean,
-                residualStd,
-                skewness,
-                kurtosis,
-                dw,
-                elasticity,
+                optimalPrice,
+                maxVolume,
                 poly2,
-                poly3
+                poly3,
+                optimalPrice2,
+                maxVolume2,
+                meanX,
+                meanY
             };
         }
-        
+
         function fitPolynomial(x, y, degree) {
             const n = x.length;
             
-            // Create design matrix
             const X = [];
             for (let i = 0; i < n; i++) {
                 const row = [];
@@ -603,14 +697,10 @@
                 X.push(row);
             }
             
-            // Normal equations: (X^T X) β = X^T y
             const XtX = multiplyMatrices(transpose(X), X);
             const Xty = multiplyMatrixVector(transpose(X), y);
-            
-            // Solve using Gaussian elimination
             const coeffs = gaussianElimination(XtX, Xty);
             
-            // Calculate R²
             const predictions = x.map((xi, i) => {
                 let pred = 0;
                 for (let d = 0; d <= degree; d++) {
@@ -628,11 +718,11 @@
             
             return {coeffs, r2, adjR2, rmse};
         }
-        
+
         function transpose(matrix) {
             return matrix[0].map((_, i) => matrix.map(row => row[i]));
         }
-        
+
         function multiplyMatrices(a, b) {
             const result = [];
             for (let i = 0; i < a.length; i++) {
@@ -647,20 +737,18 @@
             }
             return result;
         }
-        
+
         function multiplyMatrixVector(matrix, vector) {
             return matrix.map(row => 
                 row.reduce((sum, val, i) => sum + val * vector[i], 0)
             );
         }
-        
+
         function gaussianElimination(A, b) {
             const n = A.length;
             const aug = A.map((row, i) => [...row, b[i]]);
             
-            // Forward elimination
             for (let i = 0; i < n; i++) {
-                // Partial pivoting
                 let maxRow = i;
                 for (let k = i + 1; k < n; k++) {
                     if (Math.abs(aug[k][i]) > Math.abs(aug[maxRow][i])) {
@@ -669,7 +757,6 @@
                 }
                 [aug[i], aug[maxRow]] = [aug[maxRow], aug[i]];
                 
-                // Eliminate column
                 for (let k = i + 1; k < n; k++) {
                     const factor = aug[k][i] / aug[i][i];
                     for (let j = i; j <= n; j++) {
@@ -678,7 +765,6 @@
                 }
             }
             
-            // Back substitution
             const x = new Array(n);
             for (let i = n - 1; i >= 0; i--) {
                 x[i] = aug[i][n];
@@ -690,74 +776,73 @@
             
             return x;
         }
-        
-        function calculateSkewness(values) {
-            const n = values.length;
-            const mean = values.reduce((a, b) => a + b, 0) / n;
-            const std = Math.sqrt(values.reduce((sum, v) => sum + Math.pow(v - mean, 2), 0) / n);
-            const skew = values.reduce((sum, v) => sum + Math.pow((v - mean) / std, 3), 0) / n;
-            return skew;
-        }
-        
-        function calculateKurtosis(values) {
-            const n = values.length;
-            const mean = values.reduce((a, b) => a + b, 0) / n;
-            const std = Math.sqrt(values.reduce((sum, v) => sum + Math.pow(v - mean, 2), 0) / n);
-            const kurt = values.reduce((sum, v) => sum + Math.pow((v - mean) / std, 4), 0) / n;
-            return kurt - 3; // Excess kurtosis
-        }
-        
-        function calculateDurbinWatson(residuals) {
-            let sumDiff = 0;
-            let sumSquared = 0;
+
+        function generateReport(allAnalysis, competitorAnalyses, fuelType) {
+            const fuelName = fuelType === 'gasoline' ? '휘발유' : '경유';
             
-            for (let i = 1; i < residuals.length; i++) {
-                sumDiff += Math.pow(residuals[i] - residuals[i-1], 2);
-            }
-            
-            for (let i = 0; i < residuals.length; i++) {
-                sumSquared += Math.pow(residuals[i], 2);
-            }
-            
-            return sumDiff / sumSquared;
-        }
-        
-        function generateReport(analysis, fuelType) {
-            return `
+            let html = `
                 <div class="meta-info">
-                    <strong>Report Generated:</strong> ${new Date().toLocaleString('ko-KR')} | 
-                    <strong>Fuel Type:</strong> ${fuelType === 'gas' ? '휘발유' : '경유'} | 
-                    <strong>Data Points:</strong> ${analysis.n} | 
-                    <strong>Outliers Removed:</strong> ${analysis.outlierCount}
+                    <strong>📅 Report Generated:</strong> ${new Date().toLocaleString('ko-KR')} | 
+                    <strong>⛽ Fuel Type:</strong> ${fuelName} | 
+                    <strong>📊 Total Data Points:</strong> ${allAnalysis.n.toLocaleString()} | 
+                    <strong>🏢 Competitors:</strong> ${COMPETITORS.length}
                 </div>
 
                 <div class="section">
                     <div class="section-header">
-                        <h2>I. Executive Summary</h2>
+                        <h2>📊 I. 전체 통합 분석 (All Competitors Combined)</h2>
+                        <p>모든 경쟁사 데이터를 통합하여 전반적인 가격-판매량 관계 분석</p>
                     </div>
-                    <div class="grid">
-                        <div class="stat-card highlight">
-                            <div class="stat-label">Optimal Price Difference</div>
-                            <div class="stat-value">${analysis.optimalPrice.toFixed(2)}원</div>
-                            <div class="stat-sub">Compared to competitors</div>
-                        </div>
-                        <div class="stat-card highlight">
-                            <div class="stat-label">Maximum Expected Revenue</div>
-                            <div class="stat-value">₩${analysis.maxRevenue.toLocaleString('ko-KR', {maximumFractionDigits: 0})}</div>
-                            <div class="stat-sub">At optimal price point</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Correlation Coefficient</div>
-                            <div class="stat-value">${analysis.correlation.toFixed(4)}</div>
-                            <div class="stat-sub">${Math.abs(analysis.correlation) > 0.7 ? 'Strong' : Math.abs(analysis.correlation) > 0.4 ? 'Moderate' : 'Weak'} ${analysis.correlation > 0 ? 'positive' : 'negative'} correlation</div>
-                        </div>
-                    </div>
+                    ${generateAnalysisSection(allAnalysis)}
                 </div>
 
                 <div class="section">
                     <div class="section-header">
-                        <h2>II. Regression Model Comparison</h2>
+                        <h2>🏢 II. 경쟁사별 상세 분석 (Competitor-Specific Analysis)</h2>
+                        <p>각 경쟁사별 최적 가격 차이 및 예상 판매량</p>
                     </div>
+                    ${generateCompetitorComparison(competitorAnalyses)}
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2>🔍 III. 경쟁사별 세부 통계 (Detailed Statistics)</h2>
+                        <p>각 경쟁사별 회귀 모델 및 통계 지표</p>
+                    </div>
+                    ${generateCompetitorDetails(competitorAnalyses)}
+                </div>
+            `;
+            
+            return html;
+        }
+
+        function generateAnalysisSection(analysis) {
+            return `
+                <div class="grid">
+                    <div class="stat-card highlight">
+                        <div class="stat-label">최적 가격 차이 (Linear)</div>
+                        <div class="stat-value">${analysis.optimalPrice.toFixed(2)}원</div>
+                        <div class="stat-sub">우리 가격 - 경쟁사 평균</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-label">최대 예상 판매량</div>
+                        <div class="stat-value">${analysis.maxVolume.toLocaleString('ko-KR', {maximumFractionDigits: 1})}L</div>
+                        <div class="stat-sub">최적 가격 시점</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">상관계수 (R)</div>
+                        <div class="stat-value">${analysis.correlation.toFixed(4)}</div>
+                        <div class="stat-sub">${Math.abs(analysis.correlation) > 0.7 ? 'Strong' : Math.abs(analysis.correlation) > 0.4 ? 'Moderate' : 'Weak'} ${analysis.correlation > 0 ? 'positive' : 'negative'}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">결정계수 (R²)</div>
+                        <div class="stat-value">${(analysis.r2 * 100).toFixed(2)}%</div>
+                        <div class="stat-sub">모델 설명력</div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>📈 회귀 모델 비교</h3>
                     <table>
                         <thead>
                             <tr>
@@ -765,7 +850,8 @@
                                 <th>R²</th>
                                 <th>Adj. R²</th>
                                 <th>RMSE</th>
-                                <th>Equation</th>
+                                <th>최적 가격 차이</th>
+                                <th>예상 판매량</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -773,236 +859,237 @@
                                 <td><strong>Linear</strong></td>
                                 <td>${analysis.r2.toFixed(4)}</td>
                                 <td>${analysis.adjR2.toFixed(4)}</td>
-                                <td>₩${analysis.rmse.toLocaleString('ko-KR', {maximumFractionDigits: 0})}</td>
-                                <td>y = ${analysis.slope.toFixed(2)}x + ${analysis.intercept.toFixed(2)}</td>
+                                <td>${analysis.rmse.toFixed(2)}L</td>
+                                <td>${analysis.optimalPrice.toFixed(2)}원</td>
+                                <td>${analysis.maxVolume.toLocaleString('ko-KR', {maximumFractionDigits: 1})}L</td>
                             </tr>
                             <tr>
                                 <td><strong>Polynomial (deg 2)</strong></td>
                                 <td>${analysis.poly2.r2.toFixed(4)}</td>
                                 <td>${analysis.poly2.adjR2.toFixed(4)}</td>
-                                <td>₩${analysis.poly2.rmse.toLocaleString('ko-KR', {maximumFractionDigits: 0})}</td>
-                                <td>y = ${analysis.poly2.coeffs[2].toFixed(2)}x² + ${analysis.poly2.coeffs[1].toFixed(2)}x + ${analysis.poly2.coeffs[0].toFixed(2)}</td>
+                                <td>${analysis.poly2.rmse.toFixed(2)}L</td>
+                                <td>${analysis.optimalPrice2.toFixed(2)}원</td>
+                                <td>${analysis.maxVolume2.toLocaleString('ko-KR', {maximumFractionDigits: 1})}L</td>
                             </tr>
                             <tr>
                                 <td><strong>Polynomial (deg 3)</strong></td>
                                 <td>${analysis.poly3.r2.toFixed(4)}</td>
                                 <td>${analysis.poly3.adjR2.toFixed(4)}</td>
-                                <td>₩${analysis.poly3.rmse.toLocaleString('ko-KR', {maximumFractionDigits: 0})}</td>
-                                <td>y = ${analysis.poly3.coeffs[3].toFixed(2)}x³ + ${analysis.poly3.coeffs[2].toFixed(2)}x² + ${analysis.poly3.coeffs[1].toFixed(2)}x + ${analysis.poly3.coeffs[0].toFixed(2)}</td>
+                                <td>${analysis.poly3.rmse.toFixed(2)}L</td>
+                                <td colspan="2">복잡한 모델</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="section">
-                    <div class="section-header">
-                        <h2>III. Statistical Diagnostics</h2>
-                    </div>
+                <div class="subsection">
+                    <h3>📊 통계적 유의성</h3>
                     <div class="grid">
                         <div class="stat-card">
                             <div class="stat-label">F-Statistic</div>
                             <div class="stat-value">${analysis.fStat.toFixed(2)}</div>
-                            <div class="stat-sub">Model significance</div>
+                            <div class="stat-sub">모델 전체 유의성</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-label">t-Statistic</div>
                             <div class="stat-value">${analysis.tStat.toFixed(4)}</div>
-                            <div class="stat-sub">Coefficient significance</div>
+                            <div class="stat-sub">기울기 유의성</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Standard Error</div>
-                            <div class="stat-value">₩${analysis.stdError.toLocaleString('ko-KR', {maximumFractionDigits: 0})}</div>
-                            <div class="stat-sub">Prediction uncertainty</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Durbin-Watson</div>
-                            <div class="stat-value">${analysis.dw.toFixed(4)}</div>
-                            <div class="stat-sub">Autocorrelation test (target: ~2.0)</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Price Elasticity</div>
-                            <div class="stat-value">${analysis.elasticity.toFixed(4)}</div>
-                            <div class="stat-sub">${Math.abs(analysis.elasticity) > 1 ? 'Elastic' : 'Inelastic'} demand</div>
+                            <div class="stat-label">Sample Size</div>
+                            <div class="stat-value">${analysis.n.toLocaleString()}</div>
+                            <div class="stat-sub">관측치 수</div>
                         </div>
                     </div>
-                </div>
-
-                <div class="section">
-                    <div class="section-header">
-                        <h2>IV. Confidence Interval Analysis (95%)</h2>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Metric</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Point Estimate (Maximum Revenue)</td>
-                                <td>₩${analysis.maxRevenue.toLocaleString('ko-KR', {maximumFractionDigits: 0})}</td>
-                            </tr>
-                            <tr>
-                                <td>Lower Bound (95% CI)</td>
-                                <td>₩${analysis.ciLower.toLocaleString('ko-KR', {maximumFractionDigits: 0})}</td>
-                            </tr>
-                            <tr>
-                                <td>Upper Bound (95% CI)</td>
-                                <td>₩${analysis.ciUpper.toLocaleString('ko-KR', {maximumFractionDigits: 0})}</td>
-                            </tr>
-                            <tr>
-                                <td>Margin of Error</td>
-                                <td>±₩${analysis.ciMargin.toLocaleString('ko-KR', {maximumFractionDigits: 0})}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="section">
-                    <div class="section-header">
-                        <h2>V. Residual Analysis</h2>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Statistic</th>
-                                <th>Value</th>
-                                <th>Interpretation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Residual Mean</td>
-                                <td>${analysis.residualMean.toFixed(4)}</td>
-                                <td>${Math.abs(analysis.residualMean) < 100 ? 'Good (near zero)' : 'Check for bias'}</td>
-                            </tr>
-                            <tr>
-                                <td>Residual Std Dev</td>
-                                <td>₩${analysis.residualStd.toLocaleString('ko-KR', {maximumFractionDigits: 0})}</td>
-                                <td>Prediction variability</td>
-                            </tr>
-                            <tr>
-                                <td>Skewness</td>
-                                <td>${analysis.skewness.toFixed(4)}</td>
-                                <td>${Math.abs(analysis.skewness) < 0.5 ? 'Symmetric' : Math.abs(analysis.skewness) < 1 ? 'Moderately skewed' : 'Highly skewed'}</td>
-                            </tr>
-                            <tr>
-                                <td>Excess Kurtosis</td>
-                                <td>${analysis.kurtosis.toFixed(4)}</td>
-                                <td>${Math.abs(analysis.kurtosis) < 0.5 ? 'Normal' : analysis.kurtosis > 0 ? 'Heavy-tailed' : 'Light-tailed'}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="section">
-                    <div class="section-header">
-                        <h2>VI. Methodology</h2>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Component</th>
-                                <th>Method</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Outlier Detection (만남의 광장)</td>
-                                <td>Custom range: -15 to +10 KRW</td>
-                            </tr>
-                            <tr>
-                                <td>Outlier Detection (Other Competitors)</td>
-                                <td>IQR method (1.5 × IQR)</td>
-                            </tr>
-                            <tr>
-                                <td>Regression Models</td>
-                                <td>Linear, 2nd degree polynomial, 3rd degree polynomial</td>
-                            </tr>
-                            <tr>
-                                <td>Confidence Interval</td>
-                                <td>95% level (z = 1.96)</td>
-                            </tr>
-                            <tr>
-                                <td>Sample Size</td>
-                                <td>${analysis.n} observations (${analysis.outlierCount} outliers removed)</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             `;
         }
 
+        function generateCompetitorComparison(analyses) {
+            const sorted = [...analyses].sort((a, b) => b.maxVolume2 - a.maxVolume2);
+            
+            return `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>경쟁사</th>
+                            <th>최적 가격 차이</th>
+                            <th>예상 판매량</th>
+                            <th>R²</th>
+                            <th>상관계수</th>
+                            <th>데이터 수</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${sorted.map((a, idx) => `
+                            <tr ${idx === 0 ? 'class="highlight"' : ''}>
+                                <td><strong>${idx + 1}</strong></td>
+                                <td><strong>${a.label}</strong></td>
+                                <td>${a.optimalPrice2.toFixed(2)}원</td>
+                                <td>${a.maxVolume2.toLocaleString('ko-KR', {maximumFractionDigits: 1})}L</td>
+                                <td>${(a.r2 * 100).toFixed(2)}%</td>
+                                <td>${a.correlation.toFixed(4)}</td>
+                                <td>${a.n}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function generateCompetitorDetails(analyses) {
+            return analyses.map(a => `
+                <div class="subsection">
+                    <h3>🏢 ${a.label}</h3>
+                    <div class="grid">
+                        <div class="stat-card highlight">
+                            <div class="stat-label">최적 가격 차이</div>
+                            <div class="stat-value">${a.optimalPrice2.toFixed(2)}원</div>
+                            <div class="stat-sub">Polynomial Model</div>
+                        </div>
+                        <div class="stat-card highlight">
+                            <div class="stat-label">예상 판매량</div>
+                            <div class="stat-value">${a.maxVolume2.toLocaleString('ko-KR', {maximumFractionDigits: 1})}L</div>
+                            <div class="stat-sub">최적 가격 시점</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">R²</div>
+                            <div class="stat-value">${(a.r2 * 100).toFixed(2)}%</div>
+                            <div class="stat-sub">Adj. R²: ${(a.adjR2 * 100).toFixed(2)}%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">상관계수</div>
+                            <div class="stat-value">${a.correlation.toFixed(4)}</div>
+                            <div class="stat-sub">${Math.abs(a.correlation) > 0.5 ? 'Strong' : 'Moderate'}</div>
+                        </div>
+                    </div>
+                    <table style="margin-top: 1rem;">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Equation</th>
+                                <th>R²</th>
+                                <th>RMSE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Linear</td>
+                                <td>y = ${a.slope.toFixed(4)}x + ${a.intercept.toFixed(2)}</td>
+                                <td>${a.r2.toFixed(4)}</td>
+                                <td>${a.rmse.toFixed(2)}L</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>Polynomial (2)</td>
+                                <td>y = ${a.poly2.coeffs[2].toFixed(4)}x² + ${a.poly2.coeffs[1].toFixed(4)}x + ${a.poly2.coeffs[0].toFixed(2)}</td>
+                                <td>${a.poly2.r2.toFixed(4)}</td>
+                                <td>${a.poly2.rmse.toFixed(2)}L</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `).join('');
+        }
+
         async function loadAllData() {
-            const gasUrl = document.getElementById('gasUrl').value.trim();
-            const dieselUrl = document.getElementById('dieselUrl').value.trim();
+            const gasolinePriceUrl = document.getElementById('gasolinePriceUrl').value.trim();
+            const dieselPriceUrl = document.getElementById('dieselPriceUrl').value.trim();
+            const salesUrl = document.getElementById('salesUrl').value.trim();
             
             const loadBtn = document.getElementById('loadDataBtn');
             loadBtn.disabled = true;
-            loadBtn.textContent = 'Loading...';
+            loadBtn.textContent = '⏳ Loading...';
             
             try {
-                // Load gas data
-                if (gasUrl) {
-                    console.log('Loading gas data from:', gasUrl);
-                    const gasData = await loadCSV(gasUrl);
-                    const gasAnalysis = analyzeData(gasData, 'gas');
-                    document.getElementById('gasReport').innerHTML = generateReport(gasAnalysis, 'gas');
-                    console.log('Gas data loaded successfully');
-                }
+                // Load all data
+                console.log('Loading gasoline price data...');
+                const gasolinePriceData = await loadCSV(gasolinePriceUrl);
                 
-                // Load diesel data
-                if (dieselUrl) {
-                    console.log('Loading diesel data from:', dieselUrl);
-                    const dieselData = await loadCSV(dieselUrl);
-                    const dieselAnalysis = analyzeData(dieselData, 'diesel');
-                    document.getElementById('dieselReport').innerHTML = generateReport(dieselAnalysis, 'diesel');
-                    console.log('Diesel data loaded successfully');
-                }
+                console.log('Loading diesel price data...');
+                const dieselPriceData = await loadCSV(dieselPriceUrl);
                 
-                loadBtn.textContent = '✓ Data Loaded Successfully';
+                console.log('Loading sales data...');
+                const salesData = await loadCSV(salesUrl);
+                
+                // Merge and analyze gasoline
+                console.log('Analyzing gasoline...');
+                const gasolineData = mergeData(gasolinePriceData, salesData, 'gasoline');
+                const gasolineAllAnalysis = analyzeAll(gasolineData);
+                const gasolineCompetitorAnalyses = COMPETITORS
+                    .map(c => analyzeByCompetitor(gasolineData, c))
+                    .filter(a => a !== null);
+                
+                document.getElementById('gasolineReport').innerHTML = generateReport(
+                    gasolineAllAnalysis, 
+                    gasolineCompetitorAnalyses, 
+                    'gasoline'
+                );
+                
+                // Merge and analyze diesel
+                console.log('Analyzing diesel...');
+                const dieselData = mergeData(dieselPriceData, salesData, 'diesel');
+                const dieselAllAnalysis = analyzeAll(dieselData);
+                const dieselCompetitorAnalyses = COMPETITORS
+                    .map(c => analyzeByCompetitor(dieselData, c))
+                    .filter(a => a !== null);
+                
+                document.getElementById('dieselReport').innerHTML = generateReport(
+                    dieselAllAnalysis, 
+                    dieselCompetitorAnalyses, 
+                    'diesel'
+                );
+                
+                loadBtn.textContent = '✅ Analysis Complete!';
                 setTimeout(() => {
-                    loadBtn.textContent = 'Reload Data';
+                    loadBtn.textContent = '🔄 Reload Data';
                     loadBtn.disabled = false;
                 }, 2000);
                 
             } catch (error) {
-                console.error('Error loading data:', error);
+                console.error('Error:', error);
                 const errorMsg = `
                     <div class="error">
-                        <strong>Error loading data:</strong> ${error.message}<br><br>
-                        Please check:<br>
-                        1. CSV URL is correct and publicly accessible<br>
-                        2. Google Sheets is published to web<br>
-                        3. URL format: https://docs.google.com/spreadsheets/d/.../export?format=csv&gid=...
+                        <strong>❌ Error loading data:</strong> ${error.message}<br><br>
+                        <strong>Please check:</strong><br>
+                        1. All CSV URLs are correct and publicly accessible<br>
+                        2. Google Sheets are published to web as CSV<br>
+                        3. Column names match expected format<br>
+                        4. Data contains valid numbers
                     </div>
                 `;
                 
-                if (gasUrl) document.getElementById('gasReport').innerHTML = errorMsg;
-                if (dieselUrl) document.getElementById('dieselReport').innerHTML = errorMsg;
+                document.getElementById('gasolineReport').innerHTML = errorMsg;
+                document.getElementById('dieselReport').innerHTML = errorMsg;
                 
-                loadBtn.textContent = 'Try Again';
+                loadBtn.textContent = '🔄 Try Again';
                 loadBtn.disabled = false;
             }
         }
-        
+
         // Auto-load if URLs are in localStorage
         window.addEventListener('load', () => {
-            const savedGasUrl = localStorage.getItem('gasUrl');
-            const savedDieselUrl = localStorage.getItem('dieselUrl');
+            const savedGasolinePriceUrl = localStorage.getItem('gasolinePriceUrl');
+            const savedDieselPriceUrl = localStorage.getItem('dieselPriceUrl');
+            const savedSalesUrl = localStorage.getItem('salesUrl');
             
-            if (savedGasUrl) document.getElementById('gasUrl').value = savedGasUrl;
-            if (savedDieselUrl) document.getElementById('dieselUrl').value = savedDieselUrl;
+            if (savedGasolinePriceUrl) document.getElementById('gasolinePriceUrl').value = savedGasolinePriceUrl;
+            if (savedDieselPriceUrl) document.getElementById('dieselPriceUrl').value = savedDieselPriceUrl;
+            if (savedSalesUrl) document.getElementById('salesUrl').value = savedSalesUrl;
             
-            // Save URLs on input
-            document.getElementById('gasUrl').addEventListener('change', (e) => {
-                localStorage.setItem('gasUrl', e.target.value);
+            // Save URLs on change
+            document.getElementById('gasolinePriceUrl').addEventListener('change', (e) => {
+                localStorage.setItem('gasolinePriceUrl', e.target.value);
             });
-            document.getElementById('dieselUrl').addEventListener('change', (e) => {
-                localStorage.setItem('dieselUrl', e.target.value);
+            document.getElementById('dieselPriceUrl').addEventListener('change', (e) => {
+                localStorage.setItem('dieselPriceUrl', e.target.value);
+            });
+            document.getElementById('salesUrl').addEventListener('change', (e) => {
+                localStorage.setItem('salesUrl', e.target.value);
             });
         });
     </script>
 </body>
 </html>
+
+
