@@ -3,6 +3,12 @@ credentials.json
 token.pickle
 upload_log.json
 
+# Wooribos Automation - 민감한 파일들
+wooribos_config.json
+wooribos_scheduler_config.json
+wooribos_ui_structure.json
+*.log
+
 # Python
 __pycache__/
 *.py[cod]

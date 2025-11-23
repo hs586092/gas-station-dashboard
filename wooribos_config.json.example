@@ -1,0 +1,52 @@
+{
+  "program_path": "C:\\Program Files\\Wooribos\\Wooribos.exe",
+  "program_name": "Wooribos후방",
+  "download_folder": "C:\\Users\\YourName\\Downloads",
+  "wait_time": 2,
+  "max_retries": 3,
+  "menu_clicks": [
+    {
+      "type": "menu",
+      "name": "파일",
+      "description": "1단계: 파일 메뉴 클릭"
+    },
+    {
+      "type": "menu",
+      "name": "데이터",
+      "description": "2단계: 데이터 메뉴 클릭"
+    },
+    {
+      "type": "menu",
+      "name": "조회",
+      "description": "3단계: 조회 메뉴 클릭"
+    },
+    {
+      "type": "menu",
+      "name": "매출",
+      "description": "4단계: 매출 메뉴 클릭"
+    },
+    {
+      "type": "menu",
+      "name": "보고서",
+      "description": "5단계: 보고서 메뉴 클릭"
+    },
+    {
+      "type": "menu",
+      "name": "다운로드",
+      "description": "6단계: 다운로드 메뉴 클릭"
+    }
+  ],
+  "download_settings": {
+    "file_pattern": "*",
+    "auto_download_all": true,
+    "max_files": 100
+  },
+  "comments": {
+    "program_path": "Wooribos.exe 파일의 전체 경로",
+    "program_name": "프로그램 창 제목 (일부분만 입력해도 됨)",
+    "download_folder": "파일이 다운로드될 폴더",
+    "wait_time": "각 동작 후 대기 시간 (초)",
+    "menu_clicks": "순차적으로 클릭할 메뉴 목록 (UI 검사 도구로 정확한 이름 확인)",
+    "max_files": "최대 다운로드 파일 개수"
+  }
+}
